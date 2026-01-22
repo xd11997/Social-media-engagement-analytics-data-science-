@@ -4,7 +4,7 @@
 This project analyzes what drives engagement on **RedNote (Xiaohongshu)**, a major Chinese social media platform, and translates data insights into **practical posting strategies** for content creators.
 
 Using ~4,000 real posts, I built an end-to-end analytics workflow combining:
-- Exploratory analysis
+- Exploratory data analysis
 - Non-linear modeling (Random Forest)
 - Model interpretation
 - Conditional analysis
@@ -39,7 +39,7 @@ The emphasis is on **interpretability, robustness, and applicability**, rather t
 ---
 
 ## Data
-- ~4,000 posts scraped from RedNote under multiple programming-related tags (Python, CS, learning)
+- ~4,000 public posts scraped from RedNote under multiple programming-related tags (#programming, #python, #CS, #pythonlearning)
 - Each post includes:
   - Posting time
   - Topic tags (multi-label)
@@ -47,26 +47,26 @@ The emphasis is on **interpretability, robustness, and applicability**, rather t
   - Emoji usage
   - Engagement metrics (likes)
 
-> Engagement is measured using likes as a proxy due to lack of impression-level data.
+> Engagement is measured using likes as a proxy due to the lack of impression-level data.
 
 ---
 
 ## Approach
 
-### 1. Data Cleaning
+### 1. Data Cleaning and Transformation
 - Deduplicated posts across overlapping tag-based searches
 - Applied platform-specific rules (e.g., valid title length constraints)
-- Removed noise introduced by scraping artifacts
+- Converted the data type of the time-level data
 
 ### 2. Feature Engineering
-- Time features: posting hour, peak vs off-peak windows
+- Time features: posting hour
 - Text features: title length, title presence
 - Emoji features: emoji usage and count
 - Topic features: multi-hot encoded tags
 
 ### 3. Exploratory Data Analysis (EDA)
 - Examined engagement distributions and non-linear patterns
-- Identified candidate drivers such as timing and presentation features
+- Identified candidate drivers, such as timing and presentation features
 - Found that no single feature guarantees high engagement
 
 ### 4. Modeling
@@ -78,6 +78,15 @@ The emphasis is on **interpretability, robustness, and applicability**, rather t
 - Interpreted feature importance as **structural dependency**, not marginal or causal effect
 - Performed targeted conditional analyses (e.g., time × emoji, time × title)
 - Translated patterns into **context-aware posting strategies**
+
+#### Ablation Analysis: Structural vs Actionable Factors
+To further interpret feature importance results, I conducted an ablation analysis by retraining the model after removing the most structurally important topic tag.
+
+Despite its high permutation importance, removing this tag resulted in only a marginal change in model performance. This indicates that:
+- The tag functions as a **structural indicator** of content context rather than a unique driver of engagement.
+- Its information can be partially reconstructed by correlated features such as posting time, other tags, and presentation characteristics.
+
+This finding supports the hypothesis that different topic tags correspond to **different exposure pools** on the platform. While these pools have different engagement baselines, performance within each pool is primarily influenced by actionable factors such as timing and presentation, rather than tag choice alone.
 
 ---
 
@@ -125,3 +134,9 @@ Future work could incorporate controlled experiments or platform-level exposure 
 
 ## Tools
 Python, pandas, scikit-learn, seaborn, matplotlib, Jupyter Notebook
+
+## Author & Attribution
+This project was independently developed by **[Iris Xia]**.
+
+All analyses, code, and visualizations are original.  
+Reuse or adaptation is permitted with proper attribution.

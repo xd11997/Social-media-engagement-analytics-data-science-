@@ -17,7 +17,7 @@ Although the data is limited to one content domain, the **methodological framewo
 ---
 
 ## Background
-RedNote (Xiaohongshu) is a Chinese social media platform where content visibility and engagement are highly sensitive to **posting time**, **topic context**, and **presentation style**.
+As a data practitioner, I originally built a web scraper tool to automate parts of my research workflow, which proved useful not only to myself but also to colleagues. **Wanting to share this tool more broadly**, I decided to publish a post on RedNote (a Chinese social media platform) and quickly realized that content reach and engagement depended heavily on posting time, context, and presentation. This motivated me to move beyond intuition and systematically analyze **what actually drives engagement on the platform**.
 
 Content creators often rely on intuition when deciding:
 - When to post
